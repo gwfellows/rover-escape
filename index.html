@@ -16,6 +16,12 @@
 </head>
 
 <body>
+<style>
+canvas {
+	border: 1px solid red;
+
+}
+</style>
 <script>
 		function drawCircle(ctx, x, y, radius, fill, stroke, strokeWidth) {
 		  ctx.beginPath()
@@ -40,7 +46,14 @@
 		
 		window.onload = function(){
 			 ctx = document.getElementById('c').getContext('2d')
+			 ctx.imageSmoothingEnabled = false;
+			 ctx.msImageSmoothingEnabled = false;
+			ctx.mozImageSmoothingEnabled = false;
+			ctx.webkitImageSmoothingEnabled = false;
+			ctx.imageSmoothingEnabled = false;
 		}
+		
+	
 		
 		document.body.addEventListener('keydown', function(e){
 			if (e.keyCode == 39){
@@ -62,8 +75,16 @@
 		}
 		
 		function moveRover(){
-			rover_positions.push( [(rover_positions[rover_positions.length-1][0]*100+player_position[0])/101+Math.random()*2-1, (rover_positions[rover_positions.length-1][1]*100+player_position[1])/101+Math.random()*2-1] )
+			rover_positions.push( [((rover_positions[rover_positions.length-1][0]*30+player_position[0])/31+Math.random()*10-5),
+			((rover_positions[rover_positions.length-1][1]*30+player_position[1])/31+Math.random()*10-5)] )
 			rover_positions.shift()
+		}
+		
+		var rover = new Image();
+		rover.src = 'rover1.png';
+		
+		function m5(number){
+			return 5*(Math.floor(Math.abs(number/5)));
 		}
 		
 		setInterval(
@@ -71,9 +92,10 @@
 				wipeScreen();
 				moveRover();
 				for (pos of rover_positions){
-					drawCircle(ctx, pos[0], pos[1], 30, 'black', 'black', 2);
+					//drawCircle(ctx, pos[0], pos[1], 30, 'black', 'black', 2);
+					 ctx.drawImage(rover, m5(pos[0])-rover.width*5/2, m5(pos[1])-rover.width*5/2, rover.width*5,  rover.height*5 );
 				}
-				drawCircle(ctx, player_position[0], player_position[1], 10, 'black', 'black', 2);
+				drawCircle(ctx, player_position[0], player_position[1], 10, 'orange', 'orange', 2);
 				}
 				,1
 			);
