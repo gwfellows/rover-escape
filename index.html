@@ -62,7 +62,7 @@
 		}
 		
 		function moveRover(){
-			rover_positions.push( [(rover_positions[rover_positions.length-1][0]*100+player_position[0])/101, (rover_positions[rover_positions.length-1][1]*100+player_position[1])/101] )
+			rover_positions.push( [(rover_positions[rover_positions.length-1][0]*100+player_position[0])/101+Math.random()*2-1, (rover_positions[rover_positions.length-1][1]*100+player_position[1])/101+Math.random()*2-1] )
 			rover_positions.shift()
 		}
 		
