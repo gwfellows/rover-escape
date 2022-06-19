@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <title>Hello, world!</title>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta name="description" content="" />
+	
+
+</head>
+
+<body>
+<script>
+		function drawCircle(ctx, x, y, radius, fill, stroke, strokeWidth) {
+		  ctx.beginPath()
+		  ctx.arc(x, y, radius, 0, 2 * Math.PI, false)
+		  if (fill) {
+			ctx.fillStyle = fill
+			ctx.fill()
+		  }
+		  if (stroke) {
+			ctx.lineWidth = strokeWidth
+			ctx.strokeStyle = stroke
+			ctx.stroke()
+		  }
+		}
+		
+		positions = []
+		
+		xp = 0
+		yp = 0
+		
+		xr = 0
+		yr = 0
+		
+		ctx = null
+		
+		window.onload = function(){
+			 ctx = document.getElementById('c').getContext('2d')
+		}
+		
+		document.body.addEventListener('keydown', function(e){
+			if (e.keyCode == 39){
+				xp += 10
+			}
+			else if (e.keyCode == 37){
+				xp -= 10
+			}
+			else if (e.keyCode == 40){
+				yp += 10
+			}
+			else if (e.keyCode == 38){
+				yp -= 10
+			}	
+		});
+		
+		function wipeScreen(){
+			ctx.clearRect(0, 0, 800, 400);
+		}
+		
+		function moveRover(){
+			xr = (xr*100+xp)/101
+			yr = (yr*100+yp)/101
+		}
+		
+		setInterval(
+			function(){
+				wipeScreen();
+				moveRover();
+				drawCircle(ctx, xr, yr, 30, 'red', 'blue', 2);
+				drawCircle(ctx, xp, yp, 30, 'red', 'green', 2);
+				}
+				,1
+			);
+	</script>
+	<canvas id="c" width="800" height="400"></canvas>
+</body>
+
+</html>
