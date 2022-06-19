@@ -83,6 +83,9 @@ canvas {
 		var rover = new Image();
 		rover.src = 'rover1.png';
 		
+		var man = new Image();
+		man.src = 'manD.png';
+		
 		function m5(number){
 			return 5*(Math.floor(Math.abs(number/5)));
 		}
@@ -95,7 +98,7 @@ canvas {
 					//drawCircle(ctx, pos[0], pos[1], 30, 'black', 'black', 2);
 					 ctx.drawImage(rover, m5(pos[0])-rover.width*5/2, m5(pos[1])-rover.width*5/2, rover.width*5,  rover.height*5 );
 				}
-				drawCircle(ctx, player_position[0], player_position[1], 10, 'orange', 'orange', 2);
+				ctx.drawImage(man, m5(player_position[0])-man.width*5/2, m5(player_position[1])-man.width*5/2, man.width*5,  man.height*5 );
 				}
 				,1
 			);
