@@ -31,13 +31,10 @@
 		  }
 		}
 		
-		positions = []
 		
-		xp = 0
-		yp = 0
+		player_position = [20,20]
 		
-		xr = 0
-		yr = 0
+		rover_positions = [[400,200],[400,200],[400,200],[400,200],[400,200],[400,200],[400,200],[400,200]]
 		
 		ctx = null
 		
@@ -47,16 +44,16 @@
 		
 		document.body.addEventListener('keydown', function(e){
 			if (e.keyCode == 39){
-				xp += 10
+				player_position[0] += 10
 			}
 			else if (e.keyCode == 37){
-				xp -= 10
+				player_position[0] -= 10
 			}
 			else if (e.keyCode == 40){
-				yp += 10
+				player_position[1] += 10
 			}
 			else if (e.keyCode == 38){
-				yp -= 10
+				player_position[1] -= 10
 			}	
 		});
 		
@@ -65,19 +62,23 @@
 		}
 		
 		function moveRover(){
-			xr = (xr*100+xp)/101
-			yr = (yr*100+yp)/101
+			rover_positions.push( [(rover_positions[rover_positions.length-1][0]*100+player_position[0])/101, (rover_positions[rover_positions.length-1][1]*100+player_position[1])/101] )
+			rover_positions.shift()
 		}
 		
 		setInterval(
 			function(){
 				wipeScreen();
 				moveRover();
-				drawCircle(ctx, xr, yr, 30, 'red', 'blue', 2);
-				drawCircle(ctx, xp, yp, 30, 'red', 'green', 2);
+				for (pos of rover_positions){
+					drawCircle(ctx, pos[0], pos[1], 30, 'black', 'black', 2);
+				}
+				drawCircle(ctx, player_position[0], player_position[1], 10, 'black', 'black', 2);
 				}
 				,1
 			);
+			
+			
 	</script>
 	<canvas id="c" width="800" height="400"></canvas>
 </body>
