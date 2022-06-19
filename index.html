@@ -38,7 +38,7 @@ canvas {
 		}
 		
 		
-		player_position = [20,20]
+		player_position = [5*10,5*100]
 		
 		rover_positions = [[400,200],[400,200],[400,200],[400,200],[400,200],[400,200],[400,200],[400,200]]
 		
@@ -75,7 +75,7 @@ canvas {
 		});
 		
 		function wipeScreen(){
-			ctx.clearRect(0, 0, 800, 400);
+			ctx.clearRect(0, 0, 800, 600);
 		}
 		
 		function moveRover(){
@@ -83,6 +83,9 @@ canvas {
 			((rover_positions[rover_positions.length-1][1]*50+player_position[1])/51+Math.random()*10-5)] )
 			rover_positions.shift()
 		}
+		
+		var back = new Image();
+		back.src = 'background.png';
 		
 		var rover = new Image();
 		rover.src = 'rover1.png';
@@ -98,6 +101,7 @@ canvas {
 			function(){
 				wipeScreen();
 				moveRover();
+				ctx.drawImage(back, 0,0, 800,  600 );
 				for (pos of rover_positions){
 					//drawCircle(ctx, pos[0], pos[1], 30, 'black', 'black', 2);
 					 ctx.drawImage(rover, m5(pos[0])-rover.width*5/2, m5(pos[1])-rover.width*5/2, rover.width*5,  rover.height*5 );
@@ -109,7 +113,7 @@ canvas {
 			
 			
 	</script>
-	<canvas id="c" width="800" height="400"></canvas>
+	<canvas id="c" width="800" height="600"></canvas>
 </body>
 
 </html>
