@@ -38,9 +38,79 @@ canvas {
 		}
 		
 		
-		player_position = [5*10,5*100]
+		player_position = [205,500]
 		
-		rover_positions = [[400,200],[400,200],[400,200],[400,200],[400,200],[400,200],[400,200],[400,200]]
+		rover_positions = [[740,500],[740,500],[740,500],[740,500],[740,500],[740,500],[740,500]]
+		
+		foot_positions = [[740,500],[735,500],[730,500],[725,500],[720,500],[715,500],[710,500],[705,500],[700,500],[695,500],[690,500],[685,500],[680,500],[675,500],[670,500],[665,500],[660,500],[655,500],[650,500],[645,500],[640,500],
+[635,500],
+[630,500],
+[625,500],
+[620,500],
+[615,500],
+[610,500],
+[605,500],
+[600,500],
+[595,500],
+[590,500],
+[585,500],
+[580,500],
+[575,500],
+[570,500],
+[565,500],
+[560,500],
+[555,500],
+[550,500],
+[545,500],
+[540,500],
+[535,500],
+[530,500],
+[525,500],
+[520,500],
+[515,500],
+[510,500],
+[505,500],
+[500,500],
+[495,500],
+[490,500],
+[485,500],
+[480,500],
+[475,500],
+[470,500],
+[465,500],
+[460,500],
+[455,500],
+[450,500],
+[445,500],
+[440,500],[435,500],[430,500],[425,500],[420,500],[415,500],[410,500],[405,500],[400,500],[395,500],[390,500],
+[385,500],
+[380,500],
+[375,500],
+[370,500],
+[365,500],
+[360,500],
+[355,500],
+[350,500],
+[345,500],
+[340,500],
+[335,500],
+[330,500],
+[325,500],
+[320,500],
+[315,500],
+[310,500],
+[305,500],
+[300,500],
+[295,500],
+[290,500],
+[285,500],
+[280,500],
+[275,500],
+[270,500],
+[265,500],
+[260,500],
+[255,500],
+[250,500],[245,500],[240,500],[235,500],[230,500],[225,500],[220,500],[215,500],[210,500],[205,500],]
 		
 		ctx = null
 		
@@ -58,30 +128,69 @@ canvas {
 		document.body.addEventListener('keydown', function(e){
 			if (e.keyCode == 39){
 				man.src = 'manR.png';
-				player_position[0] += 10
+				player_position[0] += 5
 			}
 			else if (e.keyCode == 37){
 				man.src = 'manL.png';
-				player_position[0] -= 10
+				player_position[0] -= 5
 			}
 			else if (e.keyCode == 40){
 				man.src = 'manD.png';
-				player_position[1] += 10
+				player_position[1] += 5
 			}
 			else if (e.keyCode == 38){
 				man.src = 'manU.png';
-				player_position[1] -= 10
-			}	
+				player_position[1] -= 5
+			}
+			if (player_position[1] >= 115){
+			foot_positions.push([player_position[0], player_position[1]])
+			}
 		});
 		
 		function wipeScreen(){
 			ctx.clearRect(0, 0, 800, 600);
 		}
 		
+		function getDistance(x1, y1, x2, y2){
+			let y = x2 - x1;
+			let x = y2 - y1;
+			
+			return Math.sqrt(x * x + y * y);
+		}
+		
 		function moveRover(){
-			rover_positions.push( [((rover_positions[rover_positions.length-1][0]*50+player_position[0])/51+Math.random()*10-5),
-			((rover_positions[rover_positions.length-1][1]*50+player_position[1])/51+Math.random()*10-5)] )
-			rover_positions.shift()
+			if (foot_positions.length>0){
+				if (foot_positions[0][1] < 115){
+						rover_positions.push( [rover_positions[rover_positions.length-1][0]+Math.random()*10-5,
+						rover_positions[rover_positions.length-1][1]+Math.random()*10-5] )
+						rover_positions.shift()
+				} else {
+						if (getDistance(rover_positions[0][0],rover_positions[0][1], foot_positions[0][0], foot_positions[0][1]) < 40){
+							rover_positions.push(
+								[
+								((rover_positions[rover_positions.length-1][0]*2+foot_positions[0][0])/3+Math.random()*10-5),
+								((rover_positions[rover_positions.length-1][1]*2+foot_positions[0][1])/3+Math.random()*10-5)
+								] 
+							)
+						} else {
+							rover_positions.push(
+								[
+								((rover_positions[rover_positions.length-1][0]*60+foot_positions[0][0])/61+Math.random()*10-5),
+								((rover_positions[rover_positions.length-1][1]*60+foot_positions[0][1])/61+Math.random()*10-5)
+								] 
+							)
+						}
+						rover_positions.shift()
+				}
+			} else {
+				rover_positions.push( [rover_positions[rover_positions.length-1][0]+Math.random()*10-5,
+				rover_positions[rover_positions.length-1][1]+Math.random()*10-5] )
+				rover_positions.shift()
+			}
+			
+			while (getDistance(rover_positions[0][0],rover_positions[0][1], foot_positions.length>0 ?foot_positions[0][0] : 10000, foot_positions.length>0 ?foot_positions[0][1] : 10000) < 30){
+				foot_positions.shift()
+			}
 		}
 		
 		var back = new Image();
@@ -93,18 +202,29 @@ canvas {
 		var man = new Image();
 		man.src = 'manD.png';
 		
+		var door = new Image();
+		door.src = 'door.png';
+		
 		function m5(number){
 			return 5*(Math.floor(Math.abs(number/5)));
 		}
 		
+		
 		setInterval(
 			function(){
-				wipeScreen();
+				//wipeScreen();
 				moveRover();
 				ctx.drawImage(back, 0,0, 800,  600 );
+				
+				ctx.drawImage(door, 700-5*4, 200, door.width*5,  door.height*5);
+				
 				for (pos of rover_positions){
 					//drawCircle(ctx, pos[0], pos[1], 30, 'black', 'black', 2);
 					 ctx.drawImage(rover, m5(pos[0])-rover.width*5/2, m5(pos[1])-rover.width*5/2, rover.width*5,  rover.height*5 );
+				}
+				for (p of foot_positions){
+					//console.log(p[1])
+					drawCircle(ctx, p[0], p[1], 10, 'red', 'red', 2);
 				}
 				ctx.drawImage(man, m5(player_position[0])-man.width*5/2, m5(player_position[1])-man.width*5/2, man.width*5,  man.height*5 );
 				}
