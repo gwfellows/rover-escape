@@ -1,0 +1,5 @@
+& "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "manU.png" -transparent white "manU.png"
+& "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "manD.png" -transparent white "manD.png"
+& "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "manL.png" -transparent white "manL.png"
+& "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "manR.png" -transparent white "manR.png"
+& "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "rover1.png" -transparent white "rover1.png"
