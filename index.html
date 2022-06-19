@@ -142,7 +142,7 @@ canvas {
 				man.src = 'manU.png';
 				player_position[1] -= 5
 			}
-			if (player_position[1] >= 115){
+			if (player_position[1] >= 140){
 			foot_positions.push([player_position[0], player_position[1]])
 			}
 		});
@@ -160,7 +160,7 @@ canvas {
 		
 		function moveRover(){
 			if (foot_positions.length>0){
-				if (foot_positions[0][1] < 115){
+				if (foot_positions[0][1] < 140){
 						rover_positions.push( [rover_positions[rover_positions.length-1][0]+Math.random()*10-5,
 						rover_positions[rover_positions.length-1][1]+Math.random()*10-5] )
 						rover_positions.shift()
