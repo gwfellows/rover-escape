@@ -168,8 +168,8 @@ canvas {
 						if (getDistance(rover_positions[0][0],rover_positions[0][1], foot_positions[0][0], foot_positions[0][1]) < 40){
 							rover_positions.push(
 								[
-								((rover_positions[rover_positions.length-1][0]*4+foot_positions[0][0])/5+Math.random()*10-5),
-								((rover_positions[rover_positions.length-1][1]*4+foot_positions[0][1])/5+Math.random()*10-5)
+								((rover_positions[rover_positions.length-1][0]*3+foot_positions[0][0])/4+Math.random()*10-5),
+								((rover_positions[rover_positions.length-1][1]*3+foot_positions[0][1])/4+Math.random()*10-5)
 								] 
 							)
 						} else {
