@@ -38,7 +38,7 @@ canvas {
 		}
 		
 		
-		player_position = [205,500]
+		player_position = [205,500-5*7]
 		
 		rover_positions = [[740,500],[740,500],[740,500],[740,500],[740,500],[740,500],[740,500]]
 		
@@ -101,18 +101,11 @@ canvas {
 [310,500],
 [305,500],
 [300,500],
-[295,500],
-[290,500],
-[285,500],
-[280,500],
-[275,500],
-[270,500],
-[265,500],
-[260,500],
-[255,500],
-[250,500],[245,500],[240,500],[235,500],[230,500],[225,500],[220,500],[215,500],[210,500],[205,500],]
+[295,500],[290,500],[285,500],[280,500],[275,500],[270,500],[265,500],[260,500],[255,500],[250,500],[245,500],[240,500],[235,500],[230,500],[225,500],[220,500],[215,500],[210,500],[205,500],]
 		
 		ctx = null
+		
+		i=0;
 		
 		window.onload = function(){
 			 ctx = document.getElementById('c').getContext('2d')
@@ -123,7 +116,6 @@ canvas {
 			ctx.imageSmoothingEnabled = false;
 		}
 		
-	
 		
 		document.body.addEventListener('keydown', function(e){
 			if (e.keyCode == 39){
@@ -143,7 +135,7 @@ canvas {
 				player_position[1] -= 5
 			}
 			if (player_position[1] >= 140){
-			foot_positions.push([player_position[0], player_position[1]])
+			foot_positions.push([player_position[0], player_position[1]+5*7])
 			}
 		});
 		
@@ -205,6 +197,11 @@ canvas {
 		var door = new Image();
 		door.src = 'door.png';
 		
+		var foot = new Image();
+		foot.src = 'footprints1.png';
+		
+
+		
 		function m5(number){
 			return 5*(Math.floor(Math.abs(number/5)));
 		}
@@ -224,7 +221,10 @@ canvas {
 				}
 				for (p of foot_positions){
 					//console.log(p[1])
-					drawCircle(ctx, p[0], p[1], 10, 'red', 'red', 2);
+					//drawCircle(ctx, p[0], p[1], 2, 'red', 'red', 2);
+					i += 1
+					foot.src = ['footprints1.png', 'none.png', 'none.png','footprints2.png', 'none.png', 'none.png'][i%6]
+					ctx.drawImage(foot, p[0]-5*3, p[1], foot.width*5,  foot.height*5)
 				}
 				ctx.drawImage(man, m5(player_position[0])-man.width*5/2, m5(player_position[1])-man.width*5/2, man.width*5,  man.height*5 );
 				}

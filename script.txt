@@ -4,3 +4,6 @@
 & "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "manR.png" -transparent white "manR.png"
 & "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "rover1.png" -transparent white "rover1.png"
 & "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "door.png" -transparent white "door.png"
+& "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "footprints1.png" -transparent white "footprints1.png"
+& "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "footprints2.png" -transparent white "footprints2.png"
+& "C:\Program Files\ImageMagick-7.1.0-Q16-HDRI\magick.exe" convert "none.png" -transparent white "none.png"
