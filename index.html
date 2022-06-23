@@ -183,23 +183,31 @@ canvas {
 		document.body.addEventListener('keydown', function(e){
 			LR = false;
 			if (e.keyCode == 39){
-				man.src = 'manR.png';
-				player_position[0] += 5
-				LR = true
+				if (player_position[0]<(800-5*7)){
+					man.src = 'manR.png';
+					player_position[0] += 5
+					LR = true
+				}
 				
 			}
 			else if (e.keyCode == 37){
-				man.src = 'manL.png';
-				player_position[0] -= 5
-				LR = true
+				if (player_position[0]>(5*7)){
+					man.src = 'manL.png';
+					player_position[0] -= 5
+					LR = true
+				}
 			}
 			else if (e.keyCode == 40){
+				if (player_position[1]<(600-5*8)){
 				man.src = 'manD.png';
 				player_position[1] += 5
+				}
 			}
 			else if (e.keyCode == 38){
-				man.src = 'manU.png';
-				player_position[1] -= 5
+				if (player_position[1]>(5*7)){
+					man.src = 'manU.png';
+					player_position[1] -= 5
+				}
 			}
 			//if (player_position[1] >= 140){
 			//console.log(ctx.getImageData(10,10,13,13))
